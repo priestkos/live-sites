@@ -150,6 +150,44 @@ footer .big:hover,footer .big:focus-visible{color:var(--accent)}
 .foot-row a{text-decoration:none;transition:color .2s}
 .foot-row a:hover,.foot-row a:focus-visible{color:var(--ink)}
 
+/* ---------- GROK APPS ---------- */
+.apps{border-top:1px solid var(--line);scroll-margin-top:40px}
+.apps-bar{padding:0 var(--pad) 28px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px 48px;flex-wrap:wrap}
+.apps-say{max-width:52ch;color:#d3d5d7;text-shadow:0 0 10px var(--bg),0 0 4px var(--bg)}
+.apps-say b{color:var(--ink)}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:500 14px/1 var(--body);color:var(--mute);background:rgba(11,12,14,.6);border:1px solid var(--line);border-radius:99px;padding:9px 14px;cursor:pointer;transition:color .25s,border-color .25s,background .25s}
+.filters button span{font-variant-numeric:tabular-nums;opacity:.6;margin-left:4px}
+.filters button:hover{color:var(--ink);border-color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.filters button[aria-pressed="true"] span{opacity:.75}
+.applist{list-style:none;padding:0 var(--pad) clamp(60px,9vw,120px);counter-reset:a}
+.applist li{border-top:1px solid var(--line)}
+.applist li:last-child{border-bottom:1px solid var(--line)}
+.applist li[hidden]{display:none}
+.applist a{display:grid;grid-template-columns:3.2ch minmax(150px,1.1fr) 2.4fr 9.5em minmax(0,1.2fr);gap:8px 24px;align-items:baseline;padding:16px 0;text-decoration:none;position:relative;transition:padding .35s var(--ease),background .35s}
+.applist a::before{content:"";position:absolute;left:0;top:-1px;height:1px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.applist a:hover,.applist a:focus-visible{padding-left:12px;background:linear-gradient(90deg,rgba(76,201,255,.07),transparent 70%)}
+.applist a:hover::before,.applist a:focus-visible::before{transform:scaleX(1)}
+.an{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.08em;color:var(--mute);font-variant-numeric:tabular-nums}
+.at b{font-family:var(--display);font-weight:800;font-size:clamp(22px,2.2vw,30px);line-height:1;letter-spacing:-.01em;transition:color .25s}
+.at small{display:block;margin-top:4px;font-size:13px;color:var(--mute)}
+.applist a:hover .at b,.applist a:focus-visible .at b{color:var(--accent)}
+.ad{font-size:15px;color:#c3c6c9;text-shadow:0 0 10px var(--bg)}
+.ak{font-family:var(--display);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.ah{font-size:13px;color:var(--mute);overflow-wrap:anywhere;display:flex;justify-content:space-between;gap:10px}
+.ah i{font-style:normal;color:var(--ink);transition:transform .3s var(--ease),color .25s}
+.applist a:hover .ah i,.applist a:focus-visible .ah i{transform:translate(3px,-3px);color:var(--accent)}
+@media (max-width:1100px){
+  .applist a{grid-template-columns:3.2ch minmax(140px,1fr) 2fr minmax(0,1fr)}
+  .ak{display:none}
+}
+@media (max-width:820px){
+  .applist a{grid-template-columns:3.2ch minmax(0,1fr);gap:6px 14px}
+  .ad,.ah{grid-column:2}
+  .ah{font-size:12px}
+}
+
 @media (max-width:820px){
   .project{grid-template-columns:minmax(0,1fr)}
   .body{min-width:0}
@@ -215,7 +253,7 @@ footer .big:hover,footer .big:focus-visible{color:var(--accent)}
 
 <header class="top">
   <a href="#top">Priestkos</a>
-  <nav aria-label="Primary"><a href="#work">Sites</a><a href="#index">Index</a><a href="https://github.com/priestkos">GitHub</a></nav>
+  <nav aria-label="Primary"><a href="#work">Sites</a><a href="#apps">Apps</a><a href="#index">Index</a><a href="https://github.com/priestkos">GitHub</a></nav>
 </header>
 
 <main id="top">
@@ -386,6 +424,69 @@ footer .big:hover,footer .big:focus-visible{color:var(--accent)}
       <div class="acts"><a class="visit" href="https://frontline.kosmos14.date/">Visit Frontlines <span aria-hidden="true">↗</span></a><a class="visit alt" href="https://github.com/priestkos/frontlines">Source</a></div>
     </div>
   </article>
+
+  <!-- GROK APPS: small single-page apps built with GrokRemix, hosted on grok.me -->
+  <section class="apps" id="apps" aria-labelledby="apps-h">
+    <div class="work-head"><h2 id="apps-h">Grok<br>apps</h2><span>49 apps / grok.me / built with GrokRemix</span></div>
+    <div class="apps-bar">
+      <p class="apps-say">Small single-page things, each on its own <b>grok.me</b> address: instruments, games, maths toys, desk tools and a few pages. Pick a shelf, or take the whole run.</p>
+      <div class="filters" role="group" aria-label="Filter apps by kind">
+        <button type="button" data-kind="all" aria-pressed="true">All <span>49</span></button><button type="button" data-kind="tools" aria-pressed="false">Tools <span>12</span></button><button type="button" data-kind="maths" aria-pressed="false">Maths &amp; physics <span>9</span></button><button type="button" data-kind="visuals" aria-pressed="false">Visuals <span>8</span></button><button type="button" data-kind="games" aria-pressed="false">Games <span>6</span></button><button type="button" data-kind="sound" aria-pressed="false">Sound <span>5</span></button><button type="button" data-kind="data" aria-pressed="false">Data <span>5</span></button><button type="button" data-kind="pages" aria-pressed="false">Pages <span>4</span></button>
+      </div>
+      <p class="sr" id="apps-live" role="status" aria-live="polite"></p>
+    </div>
+    <ol class="applist reveal" id="applist">
+      <li data-kind="tools"><a href="https://palm-finance.grok.me/"><span class="an">01</span><span class="at"><b>Ledger</b></span><span class="ad">A monthly budget: income, spending by category, a savings goal and every transaction.</span><span class="ak">Tools</span><span class="ah">palm-finance.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="maths"><a href="https://able-toss.grok.me/"><span class="an">02</span><span class="at"><b>Fair Toss</b></span><span class="ad">A classroom probability lab. Flip a coin or roll dice, watch the histogram fill, and compare the run to a fair model.</span><span class="ak">Maths &amp; physics</span><span class="ah">able-toss.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="maths"><a href="https://arch-mandelbrot.grok.me/"><span class="an">03</span><span class="at"><b>Mandelbrot</b></span><span class="ad">Explore the Mandelbrot and Julia sets. Drag to pan, click to zoom, and morph a Julia seed.</span><span class="ak">Maths &amp; physics</span><span class="ah">arch-mandelbrot.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="sound"><a href="https://honey-pilot-fleet-brook.grok.me/"><span class="an">04</span><span class="at"><b>Vesper</b></span><span class="ad">Vesper is a playable desk synthesizer with on-screen keys, a filter, an envelope, and a live trace.</span><span class="ak">Sound</span><span class="ah">honey-pilot-fleet-brook.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="maths"><a href="https://moss-moss-wind-berry.grok.me/"><span class="an">05</span><span class="at"><b>Locus</b></span><span class="ad">Plot one or more functions, then zoom, pan, and read the value under the cursor.</span><span class="ak">Maths &amp; physics</span><span class="ah">moss-moss-wind-berry.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="games"><a href="https://palm-vivid-cap-horizon.grok.me/"><span class="an">06</span><span class="at"><b>Emberwatch</b></span><span class="ad">Hold the dusk causeway. Place towers, earn coin from kills, and survive every wave.</span><span class="ak">Games</span><span class="ah">palm-vivid-cap-horizon.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="visuals"><a href="https://royal-baker-turbo-jolly.grok.me/"><span class="an">07</span><span class="at"><b>Coriolis</b></span><span class="ad">Steer a warp-speed starfield. Set the speed and density, then boost.</span><span class="ak">Visuals</span><span class="ah">royal-baker-turbo-jolly.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="maths"><a href="https://bolt-swift-earth-grove.grok.me/"><span class="an">08</span><span class="at"><b>Periapsis</b></span><span class="ad">Fling planets and watch them orbit, slingshot, and collide.</span><span class="ak">Maths &amp; physics</span><span class="ah">bolt-swift-earth-grove.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="tools"><a href="https://clear-earth-wood-grove.grok.me/"><span class="an">09</span><span class="at"><b>Flashstrip</b></span><span class="ad">A carnival photo booth. Live camera, filter presets, a countdown, and a strip of prints.</span><span class="ak">Tools</span><span class="ah">clear-earth-wood-grove.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="tools"><a href="https://giant-swift-fleet-swift.grok.me/"><span class="an">10</span><span class="at"><b>Pica</b></span><span class="ad">A retro pixel desk. Draw on a resizable grid and export a crisp PNG.</span><span class="ak">Tools</span><span class="ah">giant-swift-fleet-swift.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="visuals"><a href="https://timber-civic-pilot-flora.grok.me/"><span class="an">11</span><span class="at"><b>Lamina</b></span><span class="ad">A full-screen viscous wave surface. Drag to send ripples, then let them settle.</span><span class="ak">Visuals</span><span class="ah">timber-civic-pilot-flora.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="games"><a href="https://prism-hazel-crisp-iris.grok.me/"><span class="an">12</span><span class="at"><b>Lumenstep</b></span><span class="ad">A dusk-cliff platformer. Run, double-jump, and carry the lantern to the flag.</span><span class="ak">Games</span><span class="ah">prism-hazel-crisp-iris.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="data"><a href="https://crystal-ocean-juniper-blaze.grok.me/"><span class="an">13</span><span class="at"><b>Soundings</b></span><span class="ad">A force-directed chart of a fictional hydrographic archive. Drag stations, follow ties, and search the soundings.</span><span class="ak">Data</span><span class="ah">crystal-ocean-juniper-blaze.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="data"><a href="https://king-lagoon-zinc-valley.grok.me/"><span class="an">14</span><span class="at"><b>Meridian</b></span><span class="ad">Meridian is a force-directed atlas. Drag nodes, zoom the field, search, and inspect the ties.</span><span class="ak">Data</span><span class="ah">king-lagoon-zinc-valley.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="tools"><a href="https://lark-lagoon-king-blaze.grok.me/"><span class="an">15</span><span class="at"><b>Folio</b></span><span class="ad">A quiet markdown notebook. Write, search, and preview notes saved on this device.</span><span class="ak">Tools</span><span class="ah">lark-lagoon-king-blaze.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="tools"><a href="https://civic-dove-blade-cactus.grok.me/"><span class="an">16</span><span class="at"><b>Still</b></span><span class="ad">A calm Pomodoro timer with a progress ring, session counts, and a task list.</span><span class="ak">Tools</span><span class="ah">civic-dove-blade-cactus.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="visuals"><a href="https://dawn-grove-bloom-flora.grok.me/"><span class="an">17</span><span class="at"><b>Stillwater</b></span><span class="ad">A full-screen fluid surface. Drag to send expanding waves.</span><span class="ak">Visuals</span><span class="ah">dawn-grove-bloom-flora.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="pages"><a href="https://orchid-sapphire-swift-bloom.grok.me/"><span class="an">18</span><span class="at"><b>AUREL</b> <small>Halo One</small></span><span class="ad">Orbit, light, and finish Halo One, a sculptural wireless speaker.</span><span class="ak">Pages</span><span class="ah">orchid-sapphire-swift-bloom.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="games"><a href="https://maple-ivory-orbit-umbra.grok.me/"><span class="an">19</span><span class="at"><b>Plinth</b></span><span class="ad">Drop spheres, boxes, and cylinders. Stack them, bounce them, and shove the pile around.</span><span class="ak">Games</span><span class="ah">maple-ivory-orbit-umbra.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="data"><a href="https://falcon-hill-able-light.grok.me/"><span class="an">20</span><span class="at"><b>Meridian</b></span><span class="ad">Meridian is a choropleth atlas of sample living-condition figures. Pan, zoom, and compare countries.</span><span class="ak">Data</span><span class="ah">falcon-hill-able-light.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="tools"><a href="https://bamboo-xenon-fjord-shale.grok.me/"><span class="an">21</span><span class="at"><b>Dotloom</b></span><span class="ad">A pixel drawing desk with a limited retro palette, fill, undo, and PNG export.</span><span class="ak">Tools</span><span class="ah">bamboo-xenon-fjord-shale.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="games"><a href="https://ever-topaz-bamboo-bold.grok.me/"><span class="an">22</span><span class="at"><b>Hearthmaze</b></span><span class="ad">A first-person brick maze. Cross the grass, dodge the warden, and find the gate.</span><span class="ak">Games</span><span class="ah">ever-topaz-bamboo-bold.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="visuals"><a href="https://cosmic-gem-rapid-pixel.grok.me/"><span class="an">23</span><span class="at"><b>Murmur</b></span><span class="ad">A murmuration of boids. Separation, alignment, and cohesion — scatter the flock with your cursor.</span><span class="ak">Visuals</span><span class="ah">cosmic-gem-rapid-pixel.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="sound"><a href="https://slate-topaz-beam-dove.grok.me/"><span class="an">24</span><span class="at"><b>Vela</b></span><span class="ad">A music visualizer for your microphone or a track — bars, circular modes, and color themes.</span><span class="ak">Sound</span><span class="ah">slate-topaz-beam-dove.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="sound"><a href="https://tulip-xenon-fair-cabin.grok.me/"><span class="an">25</span><span class="at"><b>Lumen</b></span><span class="ad">A music visualizer for your microphone or a track. Bars, circular modes, and color themes.</span><span class="ak">Sound</span><span class="ah">tulip-xenon-fair-cabin.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="tools"><a href="https://birch-palm-pilot-breeze.grok.me/"><span class="an">26</span><span class="at"><b>Marquee Booth</b></span><span class="ad">A pocket photo booth with a live camera, film filters, a countdown, and a strip you can save.</span><span class="ak">Tools</span><span class="ah">birch-palm-pilot-breeze.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="visuals"><a href="https://pilot-wolf-branch-fluid.grok.me/"><span class="an">27</span><span class="at"><b>Stillwater</b></span><span class="ad">A full-screen fluid surface. Drag to send waves, then tune viscosity, strength, and color.</span><span class="ak">Visuals</span><span class="ah">pilot-wolf-branch-fluid.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="maths"><a href="https://royal-star-yonder-willow.grok.me/"><span class="an">28</span><span class="at"><b>Orrery</b></span><span class="ad">A living model of the Sun and eight planets. Pause, change speed, and focus any world.</span><span class="ak">Maths &amp; physics</span><span class="ah">royal-star-yonder-willow.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="visuals"><a href="https://solar-cap-berry-rapid.grok.me/"><span class="an">29</span><span class="at"><b>Canopy</b></span><span class="ad">Grow a fractal tree. Shape the branching angle, depth, and length, then let the wind move it.</span><span class="ak">Visuals</span><span class="ah">solar-cap-berry-rapid.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="maths"><a href="https://beam-cabin-harbor-vector.grok.me/"><span class="an">30</span><span class="at"><b>Fieldline</b></span><span class="ad">Plot a vector field, edit the formula, and watch particles follow the flow.</span><span class="ak">Maths &amp; physics</span><span class="ah">beam-cabin-harbor-vector.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="tools"><a href="https://bay-umbra-bamboo-qr.grok.me/"><span class="an">31</span><span class="at"><b>Pressmark</b> <small>QR code generator</small></span><span class="ad">Make a QR code from a URL or any text. Choose colors, size, and error correction, then download a PNG.</span><span class="ak">Tools</span><span class="ah">bay-umbra-bamboo-qr.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="maths"><a href="https://leaf-wood-arrow-earth.grok.me/"><span class="an">32</span><span class="at"><b>Epicycles</b></span><span class="ad">Draw a shape and watch spinning circles rebuild it as a Fourier series.</span><span class="ak">Maths &amp; physics</span><span class="ah">leaf-wood-arrow-earth.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="sound"><a href="https://lotus-gold-drum-terra.grok.me/"><span class="an">33</span><span class="at"><b>Cadence</b></span><span class="ad">Practice chord progressions in any key with strum and arpeggio patterns, tempo, and looping playback.</span><span class="ak">Sound</span><span class="ah">lotus-gold-drum-terra.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="visuals"><a href="https://honey-bamboo-kaleidoscope-plaza.grok.me/"><span class="an">34</span><span class="at"><b>Prismwell</b></span><span class="ad">A pocket kaleidoscope. Move inside the glass and it repeats you.</span><span class="ak">Visuals</span><span class="ah">honey-bamboo-kaleidoscope-plaza.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="maths"><a href="https://bamboo-topaz-conway-life.grok.me/"><span class="an">35</span><span class="at"><b>Lattice</b></span><span class="ad">Conway’s Game of Life. Paint a grid, step the rules, and place patterns from the glider to the Gosper gun.</span><span class="ak">Maths &amp; physics</span><span class="ah">bamboo-topaz-conway-life.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="tools"><a href="https://lion-bolt-mist-quorum.grok.me/"><span class="an">36</span><span class="at"><b>Quorum</b></span><span class="ad">Open a question, vote once, and watch the tally move.</span><span class="ak">Tools</span><span class="ah">lion-bolt-mist-quorum.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="sound"><a href="https://mint-dune-king-drum.grok.me/"><span class="an">37</span><span class="at"><b>STRIKE</b></span><span class="ad">A 16-step drum machine with kick, snare, hats, percussion, swing, and tempo.</span><span class="ak">Sound</span><span class="ah">mint-dune-king-drum.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="games"><a href="https://glow-honey-sail-craft.grok.me/"><span class="an">38</span><span class="at"><b>Facet Range</b></span><span class="ad">Fly a stylized low-poly mountain range. Aim with the mouse, thrust with the keys.</span><span class="ak">Games</span><span class="ah">glow-honey-sail-craft.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="maths"><a href="https://sunny-tulip.grok.me/"><span class="an">39</span><span class="at"><b>Sieve</b></span><span class="ad">Watch the sieve of Eratosthenes cross out composites, then tap any integer for its prime factors.</span><span class="ak">Maths &amp; physics</span><span class="ah">sunny-tulip.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="visuals"><a href="https://beacon-sky-glow.grok.me/"><span class="an">40</span><span class="at"><b>Eddy</b></span><span class="ad">An interactive particle field that spirals toward your pointer.</span><span class="ak">Visuals</span><span class="ah">beacon-sky-glow.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="tools"><a href="https://able-cherry-lagoon-sky.grok.me/"><span class="an">41</span><span class="at"><b>Folio</b></span><span class="ad">A three-lane kanban board. Add, edit, and drag cards. Saved on this device.</span><span class="ak">Tools</span><span class="ah">able-cherry-lagoon-sky.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="tools"><a href="https://reef-plum-harbor-tulip.grok.me/"><span class="an">42</span><span class="at"><b>Quinary</b></span><span class="ad">Five-swatch palette instrument. Lock colors, shuffle the rest, copy hex, RGB, and HSL, check contrast, and export CSS variables.</span><span class="ak">Tools</span><span class="ah">reef-plum-harbor-tulip.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="data"><a href="https://scarlet-wave-glow-ever.grok.me/"><span class="an">43</span><span class="at"><b>Ledgerline</b></span><span class="ad">Sample subscription revenue, growth, and churn. Filters, trends, and a product breakdown — all offline.</span><span class="ak">Data</span><span class="ah">scarlet-wave-glow-ever.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="games"><a href="https://juniper-brush-jolly-flora.grok.me/"><span class="an">44</span><span class="at"><b>Hearthmaze</b></span><span class="ad">A first-person hedge maze. Find the cream gate.</span><span class="ak">Games</span><span class="ah">juniper-brush-jolly-flora.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="data"><a href="https://vivid-wind-crane-thunder.grok.me/"><span class="an">45</span><span class="at"><b>Sextant</b></span><span class="ad">A night globe of featured places. Drag to turn it, then choose a place to bring it forward.</span><span class="ak">Data</span><span class="ah">vivid-wind-crane-thunder.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="pages"><a href="https://opal-flame-timber-clover.grok.me/"><span class="an">46</span><span class="at"><b>Lantern Yard</b> <small>12 December, Kowdiar</small></span><span class="ad">One night of talks, a long supper table, and live sound under paper lanterns. Kowdiar, 12 December 2026.</span><span class="ak">Pages</span><span class="ah">opal-flame-timber-clover.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="tools"><a href="https://cabin-grove-garden-kind.grok.me/"><span class="an">47</span><span class="at"><b>Daymark</b></span><span class="ad">A quiet daybook for habits: daily check-offs, a streak calendar, and completion stats.</span><span class="ak">Tools</span><span class="ah">cabin-grove-garden-kind.grok.me<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="pages"><a href="https://kos.grok.me/link-in-bio.html"><span class="an">48</span><span class="at"><b>K&#x27;os Mos</b></span><span class="ad">A personal page with a short list of links.</span><span class="ak">Pages</span><span class="ah">kos.grok.me/link-in-bio<i aria-hidden="true">↗</i></span></a></li>
+      <li data-kind="pages"><a href="https://bold-jolly-zest-crystal.grok.me/"><span class="an">49</span><span class="at"><b>Studio index</b></span><span class="ad">A studio index by K’os Mos: instruments, small games, and objects, set in ink on paper.</span><span class="ak">Pages</span><span class="ah">bold-jolly-zest-crystal.grok.me<i aria-hidden="true">↗</i></span></a></li>
+    </ol>
+  </section>
 </main>
 
 <footer id="index">
@@ -393,7 +494,7 @@ footer .big:hover,footer .big:focus-visible{color:var(--accent)}
   <a class="big" href="https://github.com/priestkos">github.com/<br>priestkos</a>
   <div class="foot-row">
     <span>Priestkos — 2026 &nbsp; Published with GitHub Pages</span>
-    <nav aria-label="All live sites"><a href="https://priestkos.github.io/awesome-free-llm-apis/">Free LLM APIs</a><a href="https://www.kosmos14.date/">K'os Mos</a><a href="https://freemodels.kosmos14.date/">Free Models Hub</a><a href="https://guide.kosmos14.date/">Three Paths</a><a href="https://fishing.kosmos14.date/">Ocean Fishing</a><a href="https://frontline.kosmos14.date/">Frontlines</a></nav>
+    <nav aria-label="All live sites"><a href="https://priestkos.github.io/awesome-free-llm-apis/">Free LLM APIs</a><a href="https://www.kosmos14.date/">K'os Mos</a><a href="https://freemodels.kosmos14.date/">Free Models Hub</a><a href="https://guide.kosmos14.date/">Three Paths</a><a href="https://fishing.kosmos14.date/">Ocean Fishing</a><a href="https://frontline.kosmos14.date/">Frontlines</a><a href="#apps">49 Grok apps</a></nav>
   </div>
 </footer>
 
@@ -500,6 +601,16 @@ footer .big:hover,footer .big:focus-visible{color:var(--accent)}
   /* never trap anyone behind a slow network: the door opens after 9s whatever the roll call says */
   setTimeout(() => { btn.disabled = false; btn.classList.add('ready'); }, 9000);
   btn.addEventListener('click', () => enter(false));
+
+  /* grok apps: filter by kind */
+  const applist = $('#applist'), appLive = $('#apps-live'), fbtns = $$('.filters button');
+  fbtns.forEach(b => b.addEventListener('click', () => {
+    const k = b.dataset.kind;
+    fbtns.forEach(o => o.setAttribute('aria-pressed', o === b ? 'true' : 'false'));
+    let n = 0;
+    $$('li', applist).forEach(li => { const show = k === 'all' || li.dataset.kind === k; li.hidden = !show; if (show) n++; });
+    appLive.textContent = `Showing ${n} ${n === 1 ? 'app' : 'apps'}`;
+  }));
 
   /* reveal, progress, current project */
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: .04 });
