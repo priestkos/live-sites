@@ -27,7 +27,7 @@ class CoolTechIndexTest(unittest.TestCase):
     def test_cool_tech_is_a_project_with_a_roll_call_link_and_screenshot(self):
         root = Path(__file__).resolve().parents[1]
         parser = IndexParser()
-        parser.feed((root / 'index.html').read_text())
+        parser.feed((root / 'index.html').read_text(encoding='utf-8'))
         projects = [p for p in parser.projects if p.get('data-k') == 'cool-tech']
         self.assertEqual(len(projects), 1)
         self.assertEqual(projects[0].get('data-url'), 'https://priestkos-cool-tech.pages.dev/')

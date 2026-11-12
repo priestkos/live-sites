@@ -48,7 +48,7 @@ class AppsParser(HTMLParser):
 class GrokAppsTest(unittest.TestCase):
     def test_new_urls_and_filter_counts(self):
         parser = AppsParser()
-        parser.feed((Path(__file__).resolve().parents[1] / 'index.html').read_text())
+        parser.feed((Path(__file__).resolve().parents[1] / 'index.html').read_text(encoding='utf-8'))
         urls = [item['url'] for item in parser.items]
         for slug in SLUGS:
             self.assertEqual(urls.count(f'https://{slug}.grok.me'), 1, slug)
