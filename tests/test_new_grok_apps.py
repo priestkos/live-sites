@@ -17,6 +17,8 @@ class AppsParser(HTMLParser):
         self.in_list = False
         self.items = []
         self.counts = {}
+        self.button = None
+        self.read_count = False
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -29,11 +31,11 @@ class AppsParser(HTMLParser):
         elif tag == 'button' and 'data-kind' in attrs:
             self.counts[attrs['data-kind']] = None
             self.button = attrs['data-kind']
-        elif tag == 'span' and getattr(self, 'button', None):
+        elif tag == 'span' and self.button:
             self.read_count = True
 
     def handle_data(self, data):
-        if getattr(self, 'read_count', False) and data.strip().isdigit():
+        if self.read_count and data.strip().isdigit():
             self.counts[self.button] = int(data.strip())
 
     def handle_endtag(self, tag):
