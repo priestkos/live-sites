@@ -724,7 +724,7 @@ footer .big:hover,footer .big:focus-visible{color:var(--accent)}
   const sq = [[-1, -1], [1, -1], [1, 1], [-1, 1]];
   let t = 0, mx = 0, my = 0, tx = 0, ty = 0;
   const glow = new Array(N).fill(0);
-  addEventListener('pointermove', e => { tx = e.clientX / W - .5; ty = e.clientY / H - .5; });
+  if (!reduce) addEventListener('pointermove', e => { tx = e.clientX / W - .5; ty = e.clientY / H - .5; });
   const draw = () => {
     t += reduce ? 0 : .004;
     mx += (tx - mx) * .05; my += (ty - my) * .05;
@@ -745,7 +745,7 @@ footer .big:hover,footer .big:focus-visible{color:var(--accent)}
     };
     const spread = 1.5 + Math.sin(t * 2) * .08;
     for (let i = 0; i < N; i++) {
-      glow[i] += ((i === cur ? 1 : 0) - glow[i]) * .08;
+      glow[i] += ((i === cur ? 1 : 0) - glow[i]) * (reduce ? 1 : .08);
       const y = (i - (N - 1) / 2) * -(spread * 2 / Math.max(1, N - 1));
       const pts = sq.map(([a, b]) => proj(a, y, b));
       cx.beginPath(); pts.forEach((p, k) => k ? cx.lineTo(p[0], p[1]) : cx.moveTo(p[0], p[1])); cx.closePath();
@@ -758,9 +758,11 @@ footer .big:hover,footer .big:focus-visible{color:var(--accent)}
     cx.stroke();
     cx.fillStyle = 'rgba(76,201,255,.45)';
     sq.forEach(([a, b]) => [top, -top].forEach(y => { const p = proj(a, y, b); cx.beginPath(); cx.arc(p[0], p[1], 2.4, 0, 6.283); cx.fill(); }));
-    requestAnimationFrame(draw);
+    if (!reduce) requestAnimationFrame(draw);
   };
   draw();
+  /* reduced motion: no frame loop, redraw only when the scroll position or size changes */
+  if (reduce) ['scroll', 'resize'].forEach(ev => addEventListener(ev, () => requestAnimationFrame(draw), { passive: true }));
 })();
 </script>
 </body>
