@@ -634,6 +634,7 @@ footer .big:hover,footer .big:focus-visible{color:var(--accent)}
     pulse.classList.toggle('live', up > 0);
     pulseText.innerHTML = `<b>${up} of ${N}</b> answering right now &nbsp;·&nbsp; newest push ${rel(newest())}`;
   }
+  /* shortcut: no-cors resolves for any HTTP answer, so a 404/500 or captive portal still counts as live; ping a CORS /health if real status matters */
   const ping = async url => {
     const c = new AbortController(), to = setTimeout(() => c.abort(), 8000), t0 = performance.now();
     try { await fetch(url, { mode: 'no-cors', cache: 'no-store', signal: c.signal }); return Math.round(performance.now() - t0); }
